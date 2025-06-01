@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -32,7 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='container mx-auto px-4 py-4 sm:px-6 lg:px-8'>
 
         <div className="text-center py-16 px-4">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
@@ -120,33 +121,9 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="bg-gray-100 py-8 px-4 md:px-16">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-purple-600">ReportPhish.AI</h3>
-              <p className="text-gray-600 mt-2">
-                ReportPhish.AI is world's first and only automated phishing page scanning and enforcement platform.
-              </p>
-            </div>
-            <div className="mt-4 md:mt-0 flex flex-col md:flex-row gap-4">
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">Home</a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">Registration</a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">FAQ</a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">Why ReportPhish.AI?</a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">Scam Alerts</a>
-              <a href="#" className="text-gray-600 hover:text-purple-600 transition">Contact Us</a>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between items-center mt-6 text-gray-500">
-            <p>© Copyright 2019 - 2025 ReportPhish.AI</p>
-            <div className="flex flex-col md:flex-row gap-2 mt-4 md:mt-0">
-              <a href="#" className="hover:text-purple-600 transition">Privacy Policy</a>
-              <a href="#" className="hover:text-purple-600 transition">Terms of Use</a>
-              <p>info@ingresum.com | +61 7 307 8799 | 9 Bell Rd, VIC, Australia, 3004</p>
-            </div>
-          </div>
-        </footer>
+
       </div>
+      <Footer />
     </div>
   )
 } 

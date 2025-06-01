@@ -1,99 +1,128 @@
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useLocation, Link } from 'react-router-dom'; // 👈 import Link and useLocation
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); // 👈 get current path
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Registration', href: '/registration' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Why Reportphish.ai?', href: '/why' },
+    { name: 'Scam Alerts', href: '/scam-alerts' },
+    { name: 'Contact Us', href: '/contact' },
+  ];
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className=" shadow-xl py-4 w-full">
+    <header className="w-full bg-white z-50 sticky top-0 shadow-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between py-3 ">
+        <div className="flex items-center justify-between py-5">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="/">
-              <img
-                src="https://reportphish.ai/wp-content/uploads/2020/10/Logo-Rp-300-x-83.jpg"
-                alt="ReportPhish.ai Logo"
-                className="h-10 w-auto transition-transform duration-300 hover:scale-105"
-              />
-            </a>
-          </div>
+          <Link to="/" className="flex-shrink-0">
+            <div className="flex flex-col gap-y-3">
+              <div className='logo'>
+                <img
+                  src={require("../assets/images/main-logo.jpg")}
+                  alt="ReportPhish.ai Logo"
+                  className="h-12 w-auto transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className='flex items-center gap-3'>
+                <p className="text-[14px]">Made by</p>
+                <div className='logo'>
+                  <img
+                    src={require("../assets/images/logo2.jpg")}
+                    alt="ReportPhish.ai Logo"
+                    className="h-8 w-auto transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              </div>
+            </div>
+          </Link>
 
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-10">
-            {['Home', 'Registration', 'FAQ', 'Why Reportphish.ai?', 'Scam Alerts', 'Contact Us'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-black text-lg font-[400] font-sans relative group transition-colors duration-300 hover:text-[#8922fc] "
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`text-lg font-[400] font-sans relative group transition-colors duration-300 ${location.pathname === item.href ? 'text-[#8922fc]' : 'text-black'
+                  }`}
               >
-                {item}
-                <span className="absolute left-0 bottom-[-5px] w-0 h-0.5 bg-[#8922fc] rounded-full transition-all duration-300 group-hover:w-full group-hover:shadow-[0_0_5px_1px_rgba(59,130,246,0)]"></span>
-              </a>
+                {item.name}
+                <span
+                  className={`absolute left-0 bottom-[-5px] h-0.5 rounded-full transition-all duration-300 ${location.pathname === item.href
+                    ? 'w-full bg-[#8922fc] shadow-[0_0_5px_1px_rgba(59,130,246,0)]'
+                    : 'w-0 bg-[#8922fc] group-hover:w-full'
+                    }`}
+                ></span>
+              </Link>
             ))}
           </nav>
 
-          {/* Sign Up Button (Desktop) */}
+          {/* Login Button (Desktop) */}
           <div className="hidden md:block">
-            <a
-              href="#signup"
-              className="border-[2px] px-[40px] py-[10px] rounded-[50px] border-[#8922fc] text-[17px] font-[500] hover:text-[#fff] hover:bg-[#8922fc] transition-all duration-300"
+            <Link
+              to="/login"
+              className="border-2 px-10 py-3 rounded-full border-[#8922fc] text-[17px] font-medium hover:text-white hover:bg-[#8922fc] transition-all duration-300"
             >
-              Sign Up
-            </a>
+              Login
+            </Link>
           </div>
 
-          {/* Hamburger Menu (Mobile) */}
+          {/* Hamburger Icon (Mobile) */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none"
+              className="text-black focus:outline-none"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden fixed inset-0 bg-white transition-transform duration-500 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
-            } z-40`}
-        >
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed top-0 right-0 h-full w-4/5 bg-white shadow-lg transform transition-transform duration-300 z-40 ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+      >
+        <div className="p-6 flex flex-col h-full">
           {/* Close Button */}
           <button
             onClick={toggleMenu}
-            className="absolute top-4 right-4 text-black z-50"
+            className="self-end mb-6 text-black"
             aria-label="Close menu"
           >
             <FaTimes size={28} />
           </button>
 
-          <div className="relative flex flex-col items-center justify-center h-full space-y-10">
-            {['Home', 'About', 'Services', 'Contact'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+          {/* Mobile Nav Links */}
+          <div className="flex flex-col space-y-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
                 onClick={toggleMenu}
-                className="text-black text-2xl font-semibold font-sans relative group transition-colors duration-300 hover:text-blue-600"
+                className={`text-xl font-[500] transition-colors duration-200 ${location.pathname === item.href ? 'text-[#8922fc]' : 'text-black'
+                  }`}
               >
-                {item}
-                <span className="absolute left-1/2 bottom-0 w-0 h-0.5 bg-blue-400 rounded-full transition-all duration-300 group-hover:w-1/2 group-hover:left-1/4 group-hover:shadow-[0_0_5px_1px_rgba(59,130,246,0.5)]"></span>
-              </a>
+                {item.name}
+              </Link>
             ))}
-            <a
-              href="#signup"
+
+            <Link
+              to="/login"
               onClick={toggleMenu}
-              className="bg-black text-white px-8 py-3 rounded-lg font-semibold tracking-wide hover:bg-gray-900 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="mt-6 bg-[#8922fc] text-white text-center py-3 rounded-full font-semibold hover:bg-[#6a1ccf] transition duration-300 shadow-md"
             >
-              Sign Up
-            </a>
+              Login
+            </Link>
           </div>
         </div>
       </div>
