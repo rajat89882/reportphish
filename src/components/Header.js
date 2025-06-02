@@ -10,7 +10,7 @@ const Header = () => {
     { name: 'Home', href: '/' },
     { name: 'Registration', href: '/registration' },
     { name: 'FAQ', href: '/faq' },
-    { name: 'Why Reportphish.ai?', href: '/why' },
+    { name: 'Why Reportphish.ai?', href: '/why-reportphish-ai' },
     { name: 'Scam Alerts', href: '/scam-alerts' },
     { name: 'Contact Us', href: '/contact' },
   ];

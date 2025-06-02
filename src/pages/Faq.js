@@ -72,7 +72,7 @@ const faqData = [
                     "The phishing attack will typically start with a malicious email message, sent to many thousands of recipients. The email would impersonate a well-known brand or organization using the organization’s logos, formatting, or even specific phrases.",
                 ],
                 link: "Read More",
-                redirect: "/phishing"
+                redirect: "/what-is-phishing"
             },
         ],
     },

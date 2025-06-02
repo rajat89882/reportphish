@@ -6,7 +6,10 @@ import './assets/scss/main.css';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Faq from './pages/Faq';
-import Loader from './components/Loader'; // 👈 Import loader
+import Phishing from './pages/WhatPhishing';
+import WhyReportphish from './pages/WhyReportphish';
+import Loader from './components/Loader';
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +32,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/registration" element={<Register />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/what-is-phishing" element={<Phishing />} />
+          <Route path="/why-reportphish-ai" element={<WhyReportphish />} />
         </Routes>
       )}
     </Router>

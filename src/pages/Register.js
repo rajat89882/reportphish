@@ -74,14 +74,14 @@ export default function Register() {
                         {profiles.map((profile, index) => (
                             <div
                                 key={index}
-                                className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 shadow-xl text-white hover:scale-[1.02] transition-all duration-300"
+                                className="backdrop-blur-md bg-white/100 border border-white/20 rounded-2xl p-6 shadow-xl text-white hover:scale-[1.02] transition-all duration-300"
                             >
                                 <div className="flex items-start gap-3 mb-4">
                                     <span className="text-green-400 text-[22px] font-bold mt-[-5px]">{profile.number}</span>
                                     <h2
                                         className={`text-xl font-semibold ${profile.title === 'Subscribed - Enterprise $POA'
-                                            ? 'text-[#d4a5ff]'
-                                            : 'text-[#f9f9f9]'
+                                            ? 'text-[#000]'
+                                            : 'text-[#000]'
                                             }`}
                                     >
                                         {profile.title}
@@ -91,7 +91,7 @@ export default function Register() {
                                     {profile.points.map((point, idx) => (
                                         <li key={idx} className="flex items-start">
                                             <span className="text-green-400 mr-2">▶</span>
-                                            <span>{point}</span>
+                                            <span className='text-black'>{point}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -100,7 +100,7 @@ export default function Register() {
                                     <div className="mt-6 text-center">
                                         <Link
                                             to={profile.to}
-                                            className="inline-block bg-transparent text-[#d4a5ff] px-5 py-2 rounded-full border border-[#d4a5ff] hover:bg-[#d4a5ff]/50 transition-all"
+                                            className="inline-block bg-transparent text-[#7b1ce2] hover:text-white px-5 py-2 rounded-full border border-[#d4a5ff] hover:bg-[#7b1ce2]/100 transition-all"
                                         >
                                             Initiate Registration Process Here
                                         </Link>
