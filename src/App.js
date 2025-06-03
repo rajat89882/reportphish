@@ -8,7 +8,10 @@ import Register from './pages/Register';
 import Faq from './pages/Faq';
 import Phishing from './pages/WhatPhishing';
 import WhyReportphish from './pages/WhyReportphish';
+import ScamAlerts from './pages/ScamAlerts';
 import Loader from './components/Loader';
+import ScamAdvisories from './pages/ScamAdvisories';
+import WhatIsScam from './pages/WhatIsScam';
 
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
           <Route path="/faq" element={<Faq />} />
           <Route path="/what-is-phishing" element={<Phishing />} />
           <Route path="/why-reportphish-ai" element={<WhyReportphish />} />
+          <Route path="/scam-alerts" element={<ScamAlerts />} />
+          <Route path="/scam-advisories/:country" element={<ScamAdvisories />} />
+          <Route path="/what-is-scam" element={<WhatIsScam />} />
         </Routes>
       )}
     </Router>
