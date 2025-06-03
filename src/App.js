@@ -12,22 +12,23 @@ import ScamAlerts from './pages/ScamAlerts';
 import Loader from './components/Loader';
 import ScamAdvisories from './pages/ScamAdvisories';
 import WhatIsScam from './pages/WhatIsScam';
-
+import Contact from './pages/ContactUs';
+import Login from './pages/Login';
+import ScrollToTop from './components/ScrollToTop'; // ⬅️ Add this line
 
 function App() {
   const [loading, setLoading] = useState(true);
 
-  // Show loader on initial mount
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); // 1 second loading effect (you can adjust or remove)
-
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <Router>
+      <ScrollToTop /> {/* ⬅️ Add this line to enable scroll-to-top on route change */}
       {loading ? (
         <Loader />
       ) : (
@@ -40,6 +41,8 @@ function App() {
           <Route path="/scam-alerts" element={<ScamAlerts />} />
           <Route path="/scam-advisories/:country" element={<ScamAdvisories />} />
           <Route path="/what-is-scam" element={<WhatIsScam />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       )}
     </Router>

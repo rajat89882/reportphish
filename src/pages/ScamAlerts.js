@@ -28,7 +28,7 @@ export default function ScamAlerts() {
             </section>
 
             <section className="container mx-auto px-4 py-12">
-                <h2 className="text-4xl font-bold text-purple-800 mb-6 text-center">Scam Advisories per Country</h2>
+                <h2 className="text-4xl font-bold text-purple-700 mb-6 text-center">Scam Advisories per Country</h2>
                 <p className="text-lg text-gray-600 mb-8 text-center">
                     Scam advisories per country are growing fast – if there is an important advisory for your location – please share it here
                 </p>

@@ -5,10 +5,10 @@ import Footer from '../components/Footer';
 
 export default function WhyReportphish() {
     return (
-        <div>
+        <div className='bg-gradient-to-br from-purple-50 to-indigo-100'>
             <Header />
             <header className="py-8 md:py-16 text-center">
-                <h1 className="text-3xl md:text-5xl font-extrabold text-[#7d15f1] mb-4">
+                <h1 className="text-3xl md:text-5xl font-extrabold text-purple-700 mb-4">
                     Why ReportPhish.ai?
                 </h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">

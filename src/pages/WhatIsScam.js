@@ -83,7 +83,7 @@ export default function WhatIsScam() {
             <Header />
             <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
                 {/* Header Section */}
-                <header className="py-20 text-center relative overflow-hidden">
+                <header className="py-20 text-center relative overflow-hidden px-3">
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-20"></div>
                     <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-indigo-700 mb-4 relative z-10">
                         What is a Scam?
