@@ -1,17 +1,53 @@
-import React, { useState } from 'react'
-import Header from '../components/Header'
+import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 
 export default function Home() {
   const [url, setUrl] = useState('');
   const [brand, setBrand] = useState('');
+  const [loader, setLoader] = useState(false);
+  const [reports, setReports] = useState([]);
+  const [valueONload, setValueONload] = useState("11");
+  const [brandOptions, setBrandOptions] = useState([]);
 
-  const handleScan = () => {
+  const navigate = useNavigate();
+
+  const getBrands = async () => {
+    try {
+      const response = await axios.get(
+        'https://server.reportphish.ai/api/tiket/keywords/getMany'
+      );
+      setBrandOptions(response.data);
+    } catch (error) {
+      console.error('❌ Failed to load brand keywords:', error);
+    }
+  };
+
+  const handleScan = async () => {
     if (!url || !brand) {
-      alert('Please select at least one option.');
+      alert('Please enter URL and select a brand.');
       return;
     }
-    console.log('Scanning URL:', url, 'for Brand:', brand);
+
+    try {
+      setLoader(true);
+      const res = await axios.post(
+        'https://server.reportphish.ai/api/tiket/scan/addPublicScan',
+        { url, keyword: brand }
+      );
+      setLoader(false);
+      if (res.data && res.data._id) {
+        navigate(`/scan-results?id=${res.data._id}`);
+      } else {
+        alert('Scan failed. Try again.');
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error('❌ Scan error:', error);
+      alert('Scan failed.');
+    }
   };
 
   const handleClear = () => {
@@ -19,22 +55,40 @@ export default function Home() {
     setBrand('');
   };
 
-  const reports = [
-    { url: 'https://example1.com', keyword: 'TH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:54:02', safe: true },
-    { url: 'https://example2.com', keyword: 'GH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:48:43', safe: false },
-    { url: 'https://example1.com', keyword: 'TH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:54:02', safe: true },
-    { url: 'https://example2.com', keyword: 'GH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:48:43', safe: false },
-    { url: 'https://example1.com', keyword: 'TH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:54:02', safe: true },
-    { url: 'https://example2.com', keyword: 'GH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:48:43', safe: false },
-    { url: 'https://example1.com', keyword: 'TH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:54:02', safe: true },
-    { url: 'https://example2.com', keyword: 'GH-MT-0502 (India Standard Time)', date: 'May 14 2025 08:48:43', safe: false },
-  ];
+  const handleLoadmore = () => {
+    const nextValue = parseInt(valueONload) + 10;
+    setValueONload(nextValue.toString());
+    getReports(nextValue);
+  };
+
+  const getReports = async (value) => {
+    setLoader(true);
+    try {
+      const response = await axios.post(
+        'https://server.reportphish.ai/api/tiket/scan/getRecentTopPublicScan',
+        { top: value }
+      );
+      setLoader(false);
+      setReports((prev) => {
+        const newItems = response.data.slice(prev.length);
+        return [...prev, ...newItems];
+      });
+    } catch (error) {
+      setLoader(false);
+      console.error('❌ Error loading reports:', error);
+    }
+  };
+
+  useEffect(() => {
+    getReports(valueONload);
+    getBrands();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
-      <div className='container mx-auto px-4 py-4 sm:px-6 lg:px-8'>
 
+      <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="text-center py-16 px-4">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
             ReportPhish.AI is World's First Only AUTOMATED Phishing Page Scanning and Enforcement Platform
@@ -57,8 +111,11 @@ export default function Home() {
               onChange={(e) => setBrand(e.target.value)}
             >
               <option value="">Select Targeted Brand</option>
-              <option value="brand1">Brand 1</option>
-              <option value="brand2">Brand 2</option>
+              {brandOptions.map((option, i) => (
+                <option key={i} value={option.name}>
+                  {option.name}
+                </option>
+              ))}
             </select>
             <button
               onClick={handleScan}
@@ -73,57 +130,65 @@ export default function Home() {
               Clear
             </button>
           </div>
-
-          <div className="mt-12 flex flex-col md:flex-row justify-center gap-6">
-            <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
-              <p className="text-lg font-semibold text-gray-900">Is that a phishing page or a general scam?</p>
-              <p className="mt-2 text-gray-600">Report scams to <a href='#' className="text-purple-600">ScamAdviser</a></p>
-            </div>
-            <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
-              <p className="text-lg font-semibold text-gray-900">How many can you scan? How many enforcement takedowns?</p>
-              <p className="mt-2 text-gray-600">Click <a href='' className="text-purple-600">here</a></p>
-            </div>
-          </div>
         </div>
 
         <div className="block pb-10">
           <h2 className="text-2xl font-semibold mb-6 text-gray-900">Recent URLs Submitted</h2>
           <div className="overflow-x-auto">
-            <table className="w-full table-auto bg-gray-100 rounded-lg">
+            <table className="w-full table-auto bg-gray-100 rounded-lg overflow-hidden">
               <thead>
-                <tr className="bg-gray-200">
-                  <th className="p-4 text-left text-gray-900">Submitted URL</th>
-                  <th className="p-4 text-left text-gray-900">Keyword</th>
-                  <th className="p-4 text-left text-gray-900">Last Scanned</th>
-                  <th className="p-4 text-left text-gray-900">Safe / Not Safe</th>
+                <tr className="bg-gray-200 text-left text-md font-medium text-gray-900">
+                  <th className="p-4 w-[40%]">Submitted URL</th>
+                  <th className="p-4 w-[15%]">Keyword</th>
+                  <th className="p-4 w-[25%]">Last Scanned</th>
+                  <th className="p-4 w-[20%]">Safe / Not Safe</th>
                 </tr>
               </thead>
               <tbody>
-                {reports.map((report, index) => (
-                  <tr key={index} className="border-t border-gray-300">
-                    <td className="p-4 text-gray-900">{report.url}</td>
-                    <td className="p-4 text-gray-900">{report.keyword}</td>
-                    <td className="p-4 text-gray-900">{report.date}</td>
-                    <td className="p-4">
-                      {report.safe ? (
-                        <span className="text-green-600">✔ Safe</span>
-                      ) : (
-                        <span className="text-red-600">✘ Not Safe</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                {reports.map((report, index) => {
+                  const isSafe =
+                    report?.vt?.scan_result && report.vt.scan_result.verdict > 0
+                      ? false
+                      : true;
+                  return (
+                    <tr key={index} className="border-t border-gray-300 text-md">
+                      <td className="p-4 break-all text-gray-900 w-[40%]">
+                        <Link className="text-[#7e22ce] font-medium" target="_blank" to={`/scan-results?id=${report._id}`}>
+                          {report.url}
+                        </Link>
+                      </td>
+                      <td className="p-4 text-gray-900 w-[15%]">{report.keyword || '-'}</td>
+                      <td className="p-4 text-gray-900 w-[25%]">
+                        {new Date(report.last_scanned).toLocaleString('en-IN')}
+                      </td>
+                      <td className="p-4 w-[20%]">
+                        {isSafe ? (
+                          <span className="text-green-600 font-semibold">✔ Safe</span>
+                        ) : (
+                          <span className="text-red-600 font-semibold">✘ Not Safe</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
-            <button className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+            {loader && (
+              <div className=" inset-0 flex items-center justify-center flex flex-col gap-y-3 bg-white z-50 pt-10">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#8922fc] border-opacity-50"></div>
+                <p>Please wait...</p>
+              </div>
+            )}
+            <button
+              onClick={handleLoadmore}
+              className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+            >
               Load More
             </button>
           </div>
         </div>
-
-
       </div>
       <Footer />
     </div>
-  )
-} 
+  );
+}
