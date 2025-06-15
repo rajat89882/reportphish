@@ -68,7 +68,7 @@ const Header = () => {
           <div className="hidden md:block">
             <Link
               to="/login"
-              className="border-2 px-10 py-3 rounded-full border-[#8922fc] text-[17px] font-medium hover:text-white hover:bg-[#8922fc] transition-all duration-300"
+              className="border-2 text-black px-10 py-3 rounded-full border-[#8922fc] text-[17px] font-medium hover:text-white hover:bg-[#8922fc] transition-all duration-300"
             >
               Login
             </Link>

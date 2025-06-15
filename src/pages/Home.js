@@ -39,7 +39,7 @@ export default function Home() {
       );
       setLoader(false);
       if (res.data && res.data._id) {
-        navigate(`/scan-results?id=${res.data._id}`);
+        navigate(`/scan-results/${res.data._id}`);
       } else {
         alert('Scan failed. Try again.');
       }

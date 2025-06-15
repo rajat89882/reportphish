@@ -14,7 +14,8 @@ import ScamAdvisories from './pages/ScamAdvisories';
 import WhatIsScam from './pages/WhatIsScam';
 import Contact from './pages/ContactUs';
 import Login from './pages/Login';
-import ScrollToTop from './components/ScrollToTop'; // ⬅️ Add this line
+import ScrollToTop from './components/ScrollToTop'; 
+import ScanResults from './pages/ScanResults';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -43,6 +44,7 @@ function App() {
           <Route path="/what-is-scam" element={<WhatIsScam />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/scan-results/:id" element={<ScanResults />} />
         </Routes>
       )}
     </Router>
