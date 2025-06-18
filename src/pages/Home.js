@@ -153,7 +153,7 @@ export default function Home() {
                   return (
                     <tr key={index} className="border-t border-gray-300 text-md">
                       <td className="p-4 break-all text-gray-900 w-[40%]">
-                        <Link className="text-[#7e22ce] font-medium" target="_blank" to={`/scan-results?id=${report._id}`}>
+                        <Link className="text-[#7e22ce] font-medium" target="_blank" to={`/scan-results/${report._id}`}>
                           {report.url}
                         </Link>
                       </td>

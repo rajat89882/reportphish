@@ -18,7 +18,7 @@ export default function ScanResults() {
     const fetchScanData = async () => {
       try {
         const response = await axios.post(
-          'https://server.reportphish.ai/api/tiket/scan/addPublicScan', // OR try 'getResult'
+          'https://server.reportphish.ai/api/tiket/scan/getScanResult', // OR try 'getResult'
           { id }
         );
         console.log('✅ Result:', response.data);
