@@ -89,7 +89,7 @@ export default function ScanResults() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-300">Submission Date</p>
-                  <p className="text-lg">
+                  <p className="text-lg font-[inter]">
                     {new Date(scanData.last_scanned).toLocaleString() || 'N/A'}
                   </p>
                 </div>
