@@ -69,6 +69,7 @@ export default function Home() {
         { top: value }
       );
       setLoader(false);
+      console.log(response.data);
       setReports((prev) => {
         const newItems = response.data.slice(prev.length);
         return [...prev, ...newItems];
