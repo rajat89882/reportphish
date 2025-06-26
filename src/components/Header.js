@@ -11,7 +11,7 @@ const Header = () => {
     { name: 'Registration', href: '/registration' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Why Reportphish.ai?', href: '/why-reportphish-ai' },
-    { name: 'Scam Alerts', href: 'https://dev.reportphish.ai/wp' },
+    { name: 'Scam Alerts', href: 'https://dev.reportphish.ai/wp/', target: '_blank' },
     { name: 'Contact Us', href: '/contact' },
   ];
 
@@ -46,27 +46,40 @@ const Header = () => {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-lg font-[400] font-sans relative group transition-colors duration-300 ${location.pathname === item.href ? 'text-[#8922fc]' : 'text-black'
-                  }`}
-              >
-                {item.name}
-                <span
-                  className={`absolute left-0 bottom-[-5px] h-0.5 rounded-full transition-all duration-300 ${location.pathname === item.href
-                    ? 'w-full bg-[#8922fc] shadow-[0_0_5px_1px_rgba(59,130,246,0)]'
-                    : 'w-0 bg-[#8922fc] group-hover:w-full'
+            {navItems.map((item) =>
+              item.href.startsWith('http') ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target={item.target || ''}
+                  rel="noopener noreferrer"
+                  className={`text-lg font-[400] font-sans relative group transition-colors duration-300 text-black`}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-lg font-[400] font-sans relative group transition-colors duration-300 ${location.pathname === item.href ? 'text-[#8922fc]' : 'text-black'
                     }`}
-                ></span>
-              </Link>
-            ))}
+                >
+                  {item.name}
+                  <span
+                    className={`absolute left-0 bottom-[-5px] h-0.5 rounded-full transition-all duration-300 ${location.pathname === item.href
+                      ? 'w-full bg-[#8922fc] shadow-[0_0_5px_1px_rgba(59,130,246,0)]'
+                      : 'w-0 bg-[#8922fc] group-hover:w-full'
+                      }`}
+                  ></span>
+                </Link>
+              )
+            )}
           </nav>
 
           {/* Login Button (Desktop) */}
           <div className="hidden md:block">
             <Link
+              target='_blank'
               to="https://client.reportphish.ai/sys/login"
               className="border-2 text-black px-10 py-3 rounded-full border-[#8922fc] text-[17px] font-medium hover:text-white hover:bg-[#8922fc] transition-all duration-300"
             >
@@ -118,6 +131,7 @@ const Header = () => {
 
             <Link
               to="https://client.reportphish.ai/sys/login"
+              target='_blank'
               onClick={toggleMenu}
               className="mt-6 bg-[#8922fc] text-white text-center py-3 rounded-full font-semibold hover:bg-[#6a1ccf] transition duration-300 shadow-md"
             >
