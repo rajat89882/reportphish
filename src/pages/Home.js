@@ -11,6 +11,7 @@ export default function Home() {
   const [reports, setReports] = useState([]);
   const [valueONload, setValueONload] = useState("11");
   const [brandOptions, setBrandOptions] = useState([]);
+  const [ValueLoader, setValueLoader] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,21 +33,20 @@ export default function Home() {
     }
 
     try {
-      setLoader(true);
+      setValueLoader(true);
       const res = await axios.post(
         'https://server.reportphish.ai/api/tiket/scan/addPublicScan',
         { url, keyword: brand }
       );
-      setLoader(false);
+      setValueLoader(false);
       if (res.data && res.data._id) {
         navigate(`/scan-results/${res.data._id}`);
       } else {
         alert('Scan failed. Try again.');
       }
     } catch (error) {
-      setLoader(false);
+      setValueLoader(false);
       console.error('❌ Scan error:', error);
-      alert('Scan failed.');
     }
   };
 
@@ -120,9 +120,14 @@ export default function Home() {
             </select>
             <button
               onClick={handleScan}
-              className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300"
+              className="px-6 py-3 bg-purple-600 text-white flex items-center gap-2 rounded-lg hover:bg-purple-700 transition duration-300"
             >
-              Scan
+              <span>Scan</span>
+              {ValueLoader && (
+                <div className="inset-0 flex items-center justify-center flex flex-col gap-y-3 z-50 py-1">
+                  <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-[#fff] border-opacity-100" style={{ animationDuration: '0.5s' }}></div>
+                </div>
+              )}
             </button>
             <button
               onClick={handleClear}

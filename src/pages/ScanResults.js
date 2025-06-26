@@ -127,16 +127,26 @@ export default function ScanResults() {
               <div className="bg-white/10 p-6 rounded-lg backdrop-blur-lg">
                 <h3 className="text-xl font-semibold mb-4">Detected Technologies</h3>
                 <p>{scanResult.techstack?.length ? scanResult.techstack.join(', ') : 'No technologies detected.'}</p>
-                <button onClick={() => navigate('/login')} className="mt-4 px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700">
+                <a
+                  href="https://client.reportphish.ai/sys/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700"
+                >
                   Login for full access
-                </button>
+                </a>
               </div>
               <div className="bg-white/10 p-6 rounded-lg backdrop-blur-lg">
                 <h3 className="text-xl font-semibold mb-4">External Domains</h3>
                 <p>{scanResult.externalDomains?.length ? scanResult.externalDomains.join(', ') : 'No external domains found.'}</p>
-                <button onClick={() => navigate('/login')} className="mt-4 px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700">
+                <a
+                  href="https://client.reportphish.ai/sys/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700"
+                >
                   Login for full access
-                </button>
+                </a>
               </div>
             </section>
           </div>

@@ -11,7 +11,7 @@ const Header = () => {
     { name: 'Registration', href: '/registration' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Why Reportphish.ai?', href: '/why-reportphish-ai' },
-    { name: 'Scam Alerts', href: '/scam-alerts' },
+    { name: 'Scam Alerts', href: 'https://dev.reportphish.ai/wp' },
     { name: 'Contact Us', href: '/contact' },
   ];
 
@@ -67,7 +67,7 @@ const Header = () => {
           {/* Login Button (Desktop) */}
           <div className="hidden md:block">
             <Link
-              to="/login"
+              to="https://client.reportphish.ai/sys/login"
               className="border-2 text-black px-10 py-3 rounded-full border-[#8922fc] text-[17px] font-medium hover:text-white hover:bg-[#8922fc] transition-all duration-300"
             >
               Login
@@ -117,7 +117,7 @@ const Header = () => {
             ))}
 
             <Link
-              to="/login"
+              to="https://client.reportphish.ai/sys/login"
               onClick={toggleMenu}
               className="mt-6 bg-[#8922fc] text-white text-center py-3 rounded-full font-semibold hover:bg-[#6a1ccf] transition duration-300 shadow-md"
             >
