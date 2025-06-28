@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6f5d76b2.css",
+    "main.js": "/static/js/main.2e52f9f4.js",
+    "static/js/453.3a6b9c78.chunk.js": "/static/js/453.3a6b9c78.chunk.js",
+    "static/media/ilustrat-1.png": "/static/media/ilustrat-1.530d685dc08fbd2464d4.png",
+    "static/media/scam.jpg": "/static/media/scam.13e7999133066aaa7dc2.jpg",
+    "static/media/phishing-email.jpg": "/static/media/phishing-email.409907a722e3ac4580bc.jpg",
+    "static/media/phishing.png": "/static/media/phishing.126e8925a42bcfb2cda6.png",
+    "static/media/contact.png": "/static/media/contact.371f0573e58bb2666173.png",
+    "static/media/main-logo.jpg": "/static/media/main-logo.41c2560294421ae4a4cf.jpg",
+    "static/media/Illust-2.png": "/static/media/Illust-2.f045884fdc529434bec8.png",
+    "static/media/security.png": "/static/media/security.9aec4c04d0470ac1dfd6.png",
+    "static/media/shield.png": "/static/media/shield.248ff17c1899bd68eb5d.png",
+    "index.html": "/index.html",
+    "main.6f5d76b2.css.map": "/static/css/main.6f5d76b2.css.map",
+    "main.2e52f9f4.js.map": "/static/js/main.2e52f9f4.js.map",
+    "453.3a6b9c78.chunk.js.map": "/static/js/453.3a6b9c78.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f5d76b2.css",
+    "static/js/main.2e52f9f4.js"
+  ]
+}
