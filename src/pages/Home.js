@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import ErrorPopup from '../components/ErrorPopup';
 
 export default function Home() {
   const [url, setUrl] = useState('');
@@ -12,6 +13,8 @@ export default function Home() {
   const [valueONload, setValueONload] = useState("11");
   const [brandOptions, setBrandOptions] = useState([]);
   const [ValueLoader, setValueLoader] = useState(false);
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [Message , setMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -27,8 +30,9 @@ export default function Home() {
   };
 
   const handleScan = async () => {
-    if (!url || !brand) {
-      alert('Please enter URL and select a brand.');
+    if (!url) {
+      setErrorVisible(true);
+      setMessage('Please enter URL.');
       return;
     }
 
@@ -89,6 +93,11 @@ export default function Home() {
     <div className="min-h-screen bg-white text-gray-900">
       <Header />
 
+      <ErrorPopup
+        message={Message}
+        show={errorVisible}
+        onClose={() => setErrorVisible(false)}
+      />
       <div className="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="text-center py-16 px-4">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
@@ -117,6 +126,7 @@ export default function Home() {
                   {option.name}
                 </option>
               ))}
+              <option value="other">Other</option>
             </select>
             <button
               onClick={handleScan}
