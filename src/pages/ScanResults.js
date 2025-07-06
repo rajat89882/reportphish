@@ -27,7 +27,7 @@ export default function ScanResults() {
   const getBrands = async () => {
     try {
       const response = await axios.get(
-        'https://server.reportphish.ai/api/tiket/keywords/getMany'
+        'https://client.reportphish.ai/api/tiket/keywords/getMany'
       );
       setBrandOptions(response.data);
     } catch (error) {
@@ -45,7 +45,7 @@ export default function ScanResults() {
     try {
       setValueLoader(true);
       const res = await axios.post(
-        'https://server.reportphish.ai/api/tiket/scan/addPublicScan',
+        'https://client.reportphish.ai/api/tiket/scan/addPublicScan',
         { url, keyword: brand }
       );
       setValueLoader(false);
@@ -79,7 +79,7 @@ export default function ScanResults() {
     setLoading(true);
     try {
       const response = await axios.post(
-        'https://server.reportphish.ai/api/tiket/scan/getRecentTopPublicScan',
+        'https://client.reportphish.ai/api/tiket/scan/getRecentTopPublicScan',
         { id }
       );
 

@@ -2,7 +2,7 @@
   "name": "reportphish",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://server.reportphish.ai",
+  "proxy": "https://client.reportphish.ai",
   "dependencies": {
     "@tabler/icons-react": "^3.33.0",
     "@tailwindcss/cli": "^4.1.6",
